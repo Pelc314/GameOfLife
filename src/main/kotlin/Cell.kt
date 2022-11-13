@@ -1,4 +1,1 @@
-class Cell(var isAlive:Boolean) {
-
-
-}
+class Cell(var isAlive:Boolean)
