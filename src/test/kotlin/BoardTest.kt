@@ -48,6 +48,11 @@ internal class BoardTest {
 
     @Test
     fun checkIfThreeLivingCellsSpawnNewCellAfterOneIterationOfTheGame() {
+        val resultOfOneIteration = arrayOf(
+            arrayOf(Cell(true), Cell(true), Cell(false)),
+            arrayOf(Cell(true), Cell(true), Cell(false)),
+            arrayOf(Cell(false), Cell(false), Cell(false))
+        )
         val board = Board(
             arrayOf(
                 arrayOf(Cell(true), Cell(true), Cell(false)),
@@ -56,7 +61,7 @@ internal class BoardTest {
             )
         )
         board.gamearea = board.iteration()
-        assertEquals(false, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
+        assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
     }
 
     //===========================================================================
