@@ -1,22 +1,30 @@
 class Board(var gamearea: Array<Array<Cell>>) {
-    fun iteration(): Array<Array<Cell>> {
-        var result = gamearea
+    fun iteration(){
         for (i in gamearea.indices) {
             for (k in gamearea[i].indices) {
                 val cellStateChanger = StateController(gamearea[i][k])
                 cellStateChanger.stateChanger(aliveNeighbourCounter(gamearea, i, k))
             }
         }
-        return result
     }
 
     private fun aliveNeighbourCounter(twoDArrayOfCells: Array<Array<Cell>>, row: Int, column: Int): Int {
+        var counter = 0
 
-        for (i in twoDArrayOfCells.indices) {
-            for (k in twoDArrayOfCells[i].indices) {
-//TODO implement neighbour count here
-            }
+        if (row - 1 > -1) {
+            if (column - 1 > -1) if (twoDArrayOfCells[row - 1][column - 1].isAlive) counter++
+            if (twoDArrayOfCells[row - 1][column].isAlive) counter++
+            if (column + 1 < twoDArrayOfCells[row].size) if (twoDArrayOfCells[row - 1][column + 1].isAlive) counter++
         }
-        return 3
+
+        if (column - 1 > -1) if (twoDArrayOfCells[row][column - 1].isAlive) counter++
+        if (column + 1 < twoDArrayOfCells[row].size) if (twoDArrayOfCells[row][column + 1].isAlive) counter++
+
+        if (row + 1 < twoDArrayOfCells.size) {
+            if (column - 1 > -1) if (twoDArrayOfCells[row + 1][column - 1].isAlive) counter++
+            if (twoDArrayOfCells[row + 1][column].isAlive) counter++
+            if (column + 1 < twoDArrayOfCells[row].size) if (twoDArrayOfCells[row + 1][column + 1].isAlive) counter++
+        }
+        return counter
     }
 }

@@ -29,7 +29,7 @@ internal class BoardTest {
                 arrayOf(Cell(false), Cell(false), Cell(false))
             )
         )
-        board.gamearea = board.iteration()
+        board.iteration()
         assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
     }
 
@@ -42,7 +42,7 @@ internal class BoardTest {
                 arrayOf(Cell(false), Cell(false), Cell(false))
             )
         )
-        board.gamearea = board.iteration()
+        board.iteration()
         assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
     }
 
@@ -60,10 +60,22 @@ internal class BoardTest {
                 arrayOf(Cell(false), Cell(false), Cell(false))
             )
         )
-        board.gamearea = board.iteration()
+        board.iteration()
         assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
     }
 
+    @Test
+    fun checkThreeScatteredCellsDie(){
+        val board = Board(
+            arrayOf(
+                arrayOf(Cell(true), Cell(false), Cell(false)),
+                arrayOf(Cell(false), Cell(false), Cell(true)),
+                arrayOf(Cell(false), Cell(true), Cell(false))
+            )
+        )
+        board.iteration()
+        assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
+    }
     //===========================================================================
     private fun checkIfBoardsAreEqual(firstBoard: Array<Array<Cell>>, secondBoard: Array<Array<Cell>>): Boolean {
 
