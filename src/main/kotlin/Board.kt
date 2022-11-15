@@ -1,5 +1,5 @@
 class Board(var gamearea: Array<Array<Cell>>) {
-    fun iteration(){
+    fun iteration() {
         for (i in gamearea.indices) {
             for (k in gamearea[i].indices) {
                 val cellStateChanger = StateController(gamearea[i][k])
@@ -26,5 +26,27 @@ class Board(var gamearea: Array<Array<Cell>>) {
             if (column + 1 < twoDArrayOfCells[row].size) if (twoDArrayOfCells[row + 1][column + 1].isAlive) counter++
         }
         return counter
+    }
+
+    fun playGame(gameTime: Int) {
+        var time = gameTime
+        println("                   START OF THE SIMULATION")
+        while (time > 0) {
+            Thread.sleep(500)
+            time--
+            for (i in gamearea.indices) {
+                for (k in gamearea[i].indices) {
+                    print("|")
+                    if (gamearea[i][k].isAlive) {
+                        print("#")
+                    } else print("O")
+                    print("|")
+                }
+                println()
+            }
+            println("================================================================")
+            iteration()
+        }
+        println("                   END OF THE SIMULATION")
     }
 }

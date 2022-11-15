@@ -76,6 +76,26 @@ internal class BoardTest {
         board.iteration()
         assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
     }
+
+    @Test
+    fun checkIfAlgorithmWorks() {
+        val resultOfOneIteration = arrayOf(
+            arrayOf(Cell(true), Cell(true), Cell(true)),
+            arrayOf(Cell(false), Cell(true), Cell(false)),
+            arrayOf(Cell(false), Cell(false), Cell(false))
+        )
+        val board = Board(
+            arrayOf(
+                arrayOf(Cell(true), Cell(true), Cell(true)),
+                arrayOf(Cell(false), Cell(false), Cell(false)),
+                arrayOf(Cell(false), Cell(false), Cell(false))
+            )
+        )
+        //board.iteration()
+        board.playGame(5)
+
+        assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
+    }
     //===========================================================================
     private fun checkIfBoardsAreEqual(firstBoard: Array<Array<Cell>>, secondBoard: Array<Array<Cell>>): Boolean {
 
