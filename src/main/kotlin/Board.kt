@@ -3,6 +3,7 @@ class Board(var gamearea: Array<Array<Cell>>) {
         for (i in gamearea.indices) {
             for (k in gamearea[i].indices) {
                 val cellStateChanger = StateController(gamearea[i][k])
+                printFunction()
                 cellStateChanger.stateChanger(aliveNeighbourCounter(gamearea, i, k))
             }
         }
@@ -34,19 +35,23 @@ class Board(var gamearea: Array<Array<Cell>>) {
         while (time > 0) {
             Thread.sleep(500)
             time--
-            for (i in gamearea.indices) {
-                for (k in gamearea[i].indices) {
-                    print("|")
-                    if (gamearea[i][k].isAlive) {
-                        print("#")
-                    } else print("O")
-                    print("|")
-                }
-                println()
-            }
+            printFunction()
             println("================================================================")
             iteration()
         }
         println("                   END OF THE SIMULATION")
+    }
+
+    private fun printFunction() {
+        for (i in gamearea.indices) {
+            for (k in gamearea[i].indices) {
+                print("|")
+                if (gamearea[i][k].isAlive) {
+                    print("#")
+                } else print("O")
+                print("|")
+            }
+            println()
+        }
     }
 }

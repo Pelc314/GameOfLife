@@ -92,7 +92,7 @@ internal class BoardTest {
             )
         )
         //board.iteration()
-        board.playGame(5)
+        board.playGame(1)
 
         assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
     }

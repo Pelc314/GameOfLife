@@ -3,7 +3,7 @@ fun main() {
     //below you need to specify placement of alive cells in 2d array.
     val game = Board(
         arrayOf(
-            arrayOf(Cell(false), Cell(true), Cell(false), Cell(false), Cell(false)),
+            arrayOf(Cell(true), Cell(true), Cell(false), Cell(false), Cell(false)),
             arrayOf(Cell(true), Cell(true), Cell(false), Cell(false), Cell(false)),
             arrayOf(Cell(false), Cell(false), Cell(false), Cell(true), Cell(false)),
             arrayOf(Cell(false), Cell(false), Cell(true), Cell(true), Cell(true)),
