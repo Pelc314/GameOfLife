@@ -1,11 +1,22 @@
+/*
+Holds information about the whole board of the game of life. Is also responsible for performing operations on it.
+ */
 class Board(var gamearea: Array<Array<Cell>>) {
-    fun iteration(){
-        for (i in gamearea.indices) {
-            for (k in gamearea[i].indices) {
-                val cellStateChanger = StateController(gamearea[i][k])
-                cellStateChanger.stateChanger(aliveNeighbourCounter(gamearea, i, k))
+    private var tmpArea =
+        gamearea.map { arrayOfCells -> arrayOfCells.map { it.deepCopy() }.toTypedArray() }.toTypedArray()
+/*
+Iterates on the 2d table.
+ */
+    private fun iteration() {
+        tmpArea = gamearea.map { arrayOfCells -> arrayOfCells.map { it.deepCopy() }.toTypedArray() }.toTypedArray()
+
+        for (i in tmpArea.indices) {
+            for (j in tmpArea[i].indices) {
+                val stateControllerInstance = StateController(tmpArea[i][j])
+                stateControllerInstance.stateChanger(aliveNeighbourCounter(gamearea, i, j))
             }
         }
+        gamearea = tmpArea.map { arrayOfCells -> arrayOfCells.map { it.deepCopy() }.toTypedArray() }.toTypedArray()
     }
 
     private fun aliveNeighbourCounter(twoDArrayOfCells: Array<Array<Cell>>, row: Int, column: Int): Int {
@@ -27,4 +38,46 @@ class Board(var gamearea: Array<Array<Cell>>) {
         }
         return counter
     }
+
+    fun playGame(gameTime: Int) {
+        var time = gameTime
+
+        println("                   START OF THE GAME OF LIFE")
+        while (time > 0) {
+            Thread.sleep(500)
+            time--
+            printFunction()
+            println("================================================================")
+            iteration()
+        }
+        println("                   END OF THE GAME OF LIFE")
+    }
+/*
+prints the game to the console
+ */
+    private fun printFunction() {
+        for (i in gamearea.indices) {
+            for (j in gamearea[i].indices) {
+                print("|")
+                if (gamearea[i][j].isAlive) {
+                    print("#")
+                } else print("O")
+                print("|")
+            }
+            println()
+        }
+    }
+//    private fun printTmpAreaFunction() { //Function for checking the behaviour of tmparea
+//        println("PRINTING THE TMP AREA")
+//        for (i in tmpArea.indices) {
+//            for (j in tmpArea[i]!!.indices) {
+//                print("|")
+//                if (tmpArea[i]!![j].isAlive) {
+//                    print("#")
+//                } else print("O")
+//                print("|")
+//            }
+//            println()
+//        }
+//    }
 }
