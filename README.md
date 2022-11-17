@@ -14,6 +14,7 @@ It is very simple. The program runs in the console displaying alive cells as has
 If you are interested in running it I recommend installing Intellij IDE and forking the project from VCS. File -> New -> project from version control.
 JDK is Corretto 16 and I used Gradle for build.
 After opening the project there is a file StartConditions.kt in which are starting conditions for the game with explanations how to use them. Default 2d array is with beacon oscillator, visible below.
+
 ![image](https://user-images.githubusercontent.com/78445032/202552251-daa4927b-1371-4b34-9fec-8cd97f3460c3.png)
 
 I of course encourage to browse files on GitHub in case of lack of desire to run the software itself. :)
