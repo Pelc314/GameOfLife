@@ -29,7 +29,7 @@ internal class BoardTest {
                 arrayOf(Cell(false), Cell(false), Cell(false))
             )
         )
-        board.iteration()
+        board.playGame(1)
         assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
     }
 
@@ -42,7 +42,7 @@ internal class BoardTest {
                 arrayOf(Cell(false), Cell(false), Cell(false))
             )
         )
-        board.iteration()
+        board.playGame(1)
         assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
     }
 
@@ -60,12 +60,17 @@ internal class BoardTest {
                 arrayOf(Cell(false), Cell(false), Cell(false))
             )
         )
-        board.iteration()
+        board.playGame(1)
         assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
     }
 
     @Test
-    fun checkThreeScatteredCellsDie(){
+    fun checkThreeScatteredCellsDie() {
+        val resultOfOneIteration = arrayOf(
+            arrayOf(Cell(false), Cell(false), Cell(false)),
+            arrayOf(Cell(false), Cell(true), Cell(false)),
+            arrayOf(Cell(false), Cell(false), Cell(false))
+        )
         val board = Board(
             arrayOf(
                 arrayOf(Cell(true), Cell(false), Cell(false)),
@@ -73,29 +78,30 @@ internal class BoardTest {
                 arrayOf(Cell(false), Cell(true), Cell(false))
             )
         )
-        board.iteration()
-        assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
+        board.playGame(1)
+        assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
     }
 
     @Test
-    fun checkIfAlgorithmWorks() {
+    fun checkIfOscillationHappens() {
         val resultOfOneIteration = arrayOf(
-            arrayOf(Cell(true), Cell(true), Cell(true)),
             arrayOf(Cell(false), Cell(true), Cell(false)),
-            arrayOf(Cell(false), Cell(false), Cell(false))
+            arrayOf(Cell(false), Cell(true), Cell(false)),
+            arrayOf(Cell(false), Cell(true), Cell(false))
         )
         val board = Board(
             arrayOf(
-                arrayOf(Cell(true), Cell(true), Cell(true)),
                 arrayOf(Cell(false), Cell(false), Cell(false)),
+                arrayOf(Cell(true), Cell(true), Cell(true)),
                 arrayOf(Cell(false), Cell(false), Cell(false))
             )
         )
-        //board.iteration()
-        board.playGame(1)
+
+        board.playGame(5)
 
         assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
     }
+
     //===========================================================================
     private fun checkIfBoardsAreEqual(firstBoard: Array<Array<Cell>>, secondBoard: Array<Array<Cell>>): Boolean {
 
