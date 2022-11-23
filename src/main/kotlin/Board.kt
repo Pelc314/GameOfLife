@@ -2,21 +2,18 @@
 Holds information about the whole board of the game of life. Is also responsible for performing operations on it.
  */
 class Board(var gamearea: Array<Array<Cell>>) {
-    private var tmpArea =
-        gamearea.map { arrayOfCells -> arrayOfCells.map { it.deepCopy() }.toTypedArray() }.toTypedArray()
-/*
-Iterates on the 2d table.
- */
+    /*
+    Iterates on the 2d table.
+     */
     private fun iteration() {
-        tmpArea = gamearea.map { arrayOfCells -> arrayOfCells.map { it.deepCopy() }.toTypedArray() }.toTypedArray()
-
+        val tmpArea = gamearea.toMutableList()
         for (i in tmpArea.indices) {
             for (j in tmpArea[i].indices) {
                 val stateControllerInstance = StateController(tmpArea[i][j])
                 stateControllerInstance.stateChanger(aliveNeighbourCounter(gamearea, i, j))
             }
         }
-        gamearea = tmpArea.map { arrayOfCells -> arrayOfCells.map { it.deepCopy() }.toTypedArray() }.toTypedArray()
+        gamearea = tmpArea.toTypedArray()
     }
 
     private fun aliveNeighbourCounter(twoDArrayOfCells: Array<Array<Cell>>, row: Int, column: Int): Int {
@@ -52,9 +49,10 @@ Iterates on the 2d table.
         }
         println("                   END OF THE GAME OF LIFE")
     }
-/*
-prints the game to the console
- */
+
+    /*
+    prints the game to the console
+     */
     private fun printFunction() {
         for (i in gamearea.indices) {
             for (j in gamearea[i].indices) {
