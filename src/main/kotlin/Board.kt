@@ -1,24 +1,25 @@
 /*
 Holds information about the whole board of the game of life. Is also responsible for performing operations on it.
  */
-class Board(var gamearea: Array<Array<Cell>>) {
-    private var tmpArea =
-        gamearea.map { arrayOfCells -> arrayOfCells.map { it.deepCopy() }.toTypedArray() }.toTypedArray()
-/*
-Iterates on the 2d table.
- */
+class Board(var gameArea: Array<Array<Cell>>) {
+    /*
+    Iterates on the 2d table.
+     */
     private fun iteration() {
-        tmpArea = gamearea.map { arrayOfCells -> arrayOfCells.map { it.deepCopy() }.toTypedArray() }.toTypedArray()
-
+        val tmpArea = deepCopyArray(gameArea)
         for (i in tmpArea.indices) {
             for (j in tmpArea[i].indices) {
                 val stateControllerInstance = StateController(tmpArea[i][j])
-                stateControllerInstance.stateChanger(aliveNeighbourCounter(gamearea, i, j))
+                stateControllerInstance.stateChanger(aliveNeighbourCounter(gameArea, i, j))
             }
         }
-        gamearea = tmpArea.map { arrayOfCells -> arrayOfCells.map { it.deepCopy() }.toTypedArray() }.toTypedArray()
+        gameArea = deepCopyArray(tmpArea)
     }
 
+    fun deepCopyArray(original: Array<Array<Cell>>):Array<Array<Cell>>{
+        val result = original.map { arrayOfCells -> arrayOfCells.map { it.copy() } }
+        return result.map { arrayOfCells -> arrayOfCells.map { it.copy() }.toTypedArray() }.toTypedArray()
+    }
     private fun aliveNeighbourCounter(twoDArrayOfCells: Array<Array<Cell>>, row: Int, column: Int): Int {
         var counter = 0
 
@@ -50,16 +51,18 @@ Iterates on the 2d table.
             println("================================================================")
             iteration()
         }
+        printFunction()
         println("                   END OF THE GAME OF LIFE")
     }
-/*
-prints the game to the console
- */
+
+    /*
+    prints the game to the console
+     */
     private fun printFunction() {
-        for (i in gamearea.indices) {
-            for (j in gamearea[i].indices) {
+        for (i in gameArea.indices) {
+            for (j in gameArea[i].indices) {
                 print("|")
-                if (gamearea[i][j].isAlive) {
+                if (gameArea[i][j].isAlive) {
                     print("#")
                 } else print("O")
                 print("|")
@@ -67,17 +70,4 @@ prints the game to the console
             println()
         }
     }
-//    private fun printTmpAreaFunction() { //Function for checking the behaviour of tmparea
-//        println("PRINTING THE TMP AREA")
-//        for (i in tmpArea.indices) {
-//            for (j in tmpArea[i]!!.indices) {
-//                print("|")
-//                if (tmpArea[i]!![j].isAlive) {
-//                    print("#")
-//                } else print("O")
-//                print("|")
-//            }
-//            println()
-//        }
-//    }
 }

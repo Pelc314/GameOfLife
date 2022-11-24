@@ -17,7 +17,7 @@ internal class BoardTest {
                 arrayOf(Cell(false), Cell(false), Cell(false))
             )
         )
-        assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
+        assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gameArea))
     }
 
     @Test
@@ -30,7 +30,7 @@ internal class BoardTest {
             )
         )
         board.playGame(1)
-        assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
+        assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gameArea))
     }
 
     @Test
@@ -43,7 +43,7 @@ internal class BoardTest {
             )
         )
         board.playGame(1)
-        assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gamearea))
+        assertEquals(true, checkIfBoardsAreEqual(arrayOfDeadCells, board.gameArea))
     }
 
     @Test
@@ -61,11 +61,11 @@ internal class BoardTest {
             )
         )
         board.playGame(1)
-        assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
+        assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gameArea))
     }
 
     @Test
-    fun checkThreeScatteredCellsDie() {
+    fun checkThreeScatteredCellsDieBirthingAnother() {
         val resultOfOneIteration = arrayOf(
             arrayOf(Cell(false), Cell(false), Cell(false)),
             arrayOf(Cell(false), Cell(true), Cell(false)),
@@ -79,7 +79,7 @@ internal class BoardTest {
             )
         )
         board.playGame(1)
-        assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
+        assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gameArea))
     }
 
     @Test
@@ -99,7 +99,29 @@ internal class BoardTest {
 
         board.playGame(5)
 
-        assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gamearea))
+        assertEquals(true, checkIfBoardsAreEqual(resultOfOneIteration, board.gameArea))
+    }
+
+    @Test
+    fun checkIfDeepCopyCopiesObjects() {
+
+        val board = Board(
+            arrayOf(
+                arrayOf(Cell(false), Cell(false), Cell(false)),
+                arrayOf(Cell(false), Cell(false), Cell(false)),
+                arrayOf(Cell(false), Cell(false), Cell(false))
+            )
+        )
+        val resultBoard =  board.deepCopyArray(board.gameArea)
+        //Cell location on the board which we want to alter
+        val row = 1
+        val column = 1
+
+        resultBoard[row][column].isAlive = true
+        println(resultBoard[row][column].isAlive)
+        println(board.gameArea[row][column].isAlive)
+
+        assertEquals(false, checkIfBoardsAreEqual(resultBoard,board.gameArea))
     }
 
     //===========================================================================
@@ -107,7 +129,7 @@ internal class BoardTest {
 
         if (firstBoard.size == secondBoard.size) {
             for (i in firstBoard.indices) {
-                for (j in 0 until firstBoard[i].size) {
+                for (j in firstBoard[i].indices) {
                     if (firstBoard[i][j].isAlive != secondBoard[i][j].isAlive) {
                         return false
                     }
