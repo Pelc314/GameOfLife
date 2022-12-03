@@ -16,7 +16,7 @@ class Board(var gameArea: Array<Array<Cell>>) {
         gameArea = deepCopyArray(tmpArea)
     }
 
-    fun deepCopyArray(original: Array<Array<Cell>>):Array<Array<Cell>>{
+    fun deepCopyArray(original: Array<Array<Cell>>): Array<Array<Cell>> {
         val result = original.map { arrayOfCells -> arrayOfCells.map { it.copy() } }
         return result.map { arrayOfCells -> arrayOfCells.map { it.copy() }.toTypedArray() }.toTypedArray()
     }
@@ -24,18 +24,18 @@ class Board(var gameArea: Array<Array<Cell>>) {
         var counter = 0
 
         if (row - 1 > -1) {
-            if (column - 1 > -1) if (twoDArrayOfCells[row - 1][column - 1].isAlive) counter++
+            if (column - 1 > -1 && twoDArrayOfCells[row - 1][column - 1].isAlive)counter++
             if (twoDArrayOfCells[row - 1][column].isAlive) counter++
-            if (column + 1 < twoDArrayOfCells[row].size) if (twoDArrayOfCells[row - 1][column + 1].isAlive) counter++
+            if (column + 1 < twoDArrayOfCells[row].size && twoDArrayOfCells[row - 1][column + 1].isAlive) counter++
         }
 
-        if (column - 1 > -1) if (twoDArrayOfCells[row][column - 1].isAlive) counter++
-        if (column + 1 < twoDArrayOfCells[row].size) if (twoDArrayOfCells[row][column + 1].isAlive) counter++
+        if (column - 1 > -1 && twoDArrayOfCells[row][column - 1].isAlive) counter++
+        if (column + 1 < twoDArrayOfCells[row].size && twoDArrayOfCells[row][column + 1].isAlive) counter++
 
         if (row + 1 < twoDArrayOfCells.size) {
-            if (column - 1 > -1) if (twoDArrayOfCells[row + 1][column - 1].isAlive) counter++
+            if (column - 1 > -1 && twoDArrayOfCells[row + 1][column - 1].isAlive) counter++
             if (twoDArrayOfCells[row + 1][column].isAlive) counter++
-            if (column + 1 < twoDArrayOfCells[row].size) if (twoDArrayOfCells[row + 1][column + 1].isAlive) counter++
+            if (column + 1 < twoDArrayOfCells[row].size && twoDArrayOfCells[row + 1][column + 1].isAlive) counter++
         }
         return counter
     }
