@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.* // ktlint-disable no-wildcard-imports
 import org.junit.jupiter.api.Test
 
 internal class StateControllerTest {
@@ -25,6 +25,7 @@ internal class StateControllerTest {
             tmp++
         }
     }
+
     @Test
     fun livingCellWithFourOrMoreNeighboursDies() {
         val cell = Cell(true)

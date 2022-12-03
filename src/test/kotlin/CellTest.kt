@@ -8,6 +8,7 @@ internal class CellTest {
         val cell = Cell(false)
         assertEquals(false, cell.isAlive)
     }
+
     @Test
     fun aliveCellIsCreated() {
         val cell = Cell(true)

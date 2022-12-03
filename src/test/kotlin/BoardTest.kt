@@ -104,7 +104,6 @@ internal class BoardTest {
 
     @Test
     fun checkIfDeepCopyCopiesObjects() {
-
         val board = Board(
             arrayOf(
                 arrayOf(Cell(false), Cell(false), Cell(false)),
@@ -112,8 +111,8 @@ internal class BoardTest {
                 arrayOf(Cell(false), Cell(false), Cell(false))
             )
         )
-        val resultBoard =  board.deepCopyArray(board.gameArea)
-        //Cell location on the board which we want to alter
+        val resultBoard = board.deepCopyArray(board.gameArea)
+        // Cell location on the board which we want to alter
         val row = 1
         val column = 1
 
@@ -121,12 +120,11 @@ internal class BoardTest {
         println(resultBoard[row][column].isAlive)
         println(board.gameArea[row][column].isAlive)
 
-        assertEquals(false, checkIfBoardsAreEqual(resultBoard,board.gameArea))
+        assertEquals(false, checkIfBoardsAreEqual(resultBoard, board.gameArea))
     }
 
-    //===========================================================================
+    // ===========================================================================
     private fun checkIfBoardsAreEqual(firstBoard: Array<Array<Cell>>, secondBoard: Array<Array<Cell>>): Boolean {
-
         if (firstBoard.size == secondBoard.size) {
             for (i in firstBoard.indices) {
                 for (j in firstBoard[i].indices) {
