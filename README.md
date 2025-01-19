@@ -19,7 +19,4 @@ After opening the project there is a file StartConditions.kt in which are starti
 
 I of course encourage to browse files on GitHub in case of lack of desire to run the software itself. :)
 
-### Future
-I plan to expand this project.
-I want to create a interface to easily setup the starting conditions. 
-I also want to create 2d array without boundaries (it would loop itself when reaching certain size.)
+
